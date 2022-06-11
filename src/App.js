@@ -1,11 +1,13 @@
 import React from "react";
+import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Home from './pages/Home';
-import LoginRedirect from './pages/LoginRedirect';
+import Home from "./components/Home/Home";
+import LoginRedirect from "./components/Home/LoginRedirect";
+import HomeView from "./components/Home/HomeView";
 
 const App = () => {
   const backendUrl = 'http://localhost:1337';
@@ -24,6 +26,7 @@ const App = () => {
         <Switch>
           <Route exact path="/connect/:providerName/redirect" component={LoginRedirect} />
           <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={HomeView} />
         </Switch>
     </Router>
   );

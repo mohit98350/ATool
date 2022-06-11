@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const backendUrl = 'http://localhost:1337';
 
 const LoginRedirect = (props) => {
-  const [text, setText] = useState('Loading...');
+  const [text, setText] = useState('');
+  const[load , setLoad]=useState(false);
   const location = useLocation();
   const params = useParams();
   const history = useHistory();
@@ -12,13 +15,16 @@ const LoginRedirect = (props) => {
   useEffect(() => {
     // Successfully logged with the provider
     // Now logging with strapi by using the access_token (given by the provider) in props.location.search
+    console.log(location.search)
+
     fetch(`${backendUrl}/api/auth/${params.providerName}/callback${location.search}`)
       .then(res => {
         if (res.status !== 200) {
           throw new Error(`Couldn't login to Strapi. Status: ${res.status}`);
         }
-        return res;
         console.log(res)
+        console.log(location.search)
+        return res;
       })
       .then(res => res.json())
       .then(res => {
@@ -27,8 +33,10 @@ const LoginRedirect = (props) => {
         console.log(res)
         localStorage.setItem('jwt', res.jwt);
         localStorage.setItem('username', res.user.username);
+        setLoad(true)
         setText('You have been successfully logged in. You will be redirected in a few seconds...');
-        // setTimeout(() => history.push('/'), 3000); // Redirect to homepage after 3 sec
+    
+        setTimeout(() => history.push('/home'), 5000); // Redirect to homepage after 3 sec
       })
       .catch(err => {
         console.log(err);
@@ -36,7 +44,17 @@ const LoginRedirect = (props) => {
       });
   }, [history, location.search, params.providerName]);
 
-  return <p>{text}</p>
+  return (
+    <div className=''>
+      {/* <p>{text}</p> */}
+  {load ?  <Box sx={{ display: 'flex'}}>
+  <CircularProgress  
+        size={70}
+        style={{marginLeft: '50%',marginTop:'20%'}}/>
+</Box>:''}
+    </div>
+  
+  )
 };
 
 export default LoginRedirect;
