@@ -11,12 +11,13 @@
 }
 
 .inside{
-    line-height: 50px;
+    line-height: 70px;
     display: flex;
     margin-left: 350px;
     /* justify-content: space-evenly;  */
     
 }
+
 .home_input{
     min-width: 160px;
     height: 15px;
@@ -39,12 +40,12 @@
     color:black
 
 }
-.inside
-div{
-    cursor: pointer;
-}
+
 .image{
    margin-top: 15%;
    margin-left: 40%;
+}
+.home_logo{
+width: 10rem
 }
 

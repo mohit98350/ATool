@@ -62,62 +62,11 @@ const Navbar = () => {
         <>
             <AppBar position="static" style={{ background: 'white' }}>
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters>
-                        <AdbIcon sx={{ display: { xs: 'none', md: 'flex', color: 'black' }, mr: 1 }} />
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="a"
-                            href="/"
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                                color: 'black'
-                            }}
-                        >
-                            LOGO
-                        </Typography>
+                    <Toolbar disableGutters>                    
+                        <img  className='home_logo' src='../logo.jpg'/>
 
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', color: 'black' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleOpenNavMenu}
-                                color="inherit"
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none', color: 'black' },
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
+                        <Box sx={{ flexGrow: 1, display: { xs:'flex', md: 'none', color: 'black' } }}>
+                          
                         </Box>
                         <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                         <Typography
@@ -138,27 +87,18 @@ const Navbar = () => {
                         >
                             LOGO
                         </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', color: 'black' } }}>
-                            {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block', color: 'black' }}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
+                        <Box sx={{ flexGrow: 1, display: {xs: 'none', md: 'flex', color: 'black' } }}>
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
+                            <Tooltip title="My Profile">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: 'black' }}>
-                                    {/* <Avatar alt="Remy Sharp" /> */}
+                                    
                                     {name}
                                 </IconButton>
                             </Tooltip>
                             <Menu
-                                sx={{ mt: '45px', color: 'black' }}
+                                sx={{ mt: '45', color: 'black' }}
                                 id="menu-appbar"
                                 anchorEl={anchorElUser}
                                 anchorOrigin={{
@@ -185,7 +125,8 @@ const Navbar = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <div className="small_Nav" style={{ backgroundColor: 'whitesmoke', padding: '5px' }}>
+          
+            <div className="small_Nav" style={{ backgroundColor: 'whitesmoke', padding: '10px' }}>
                 <div className="inside">
                     <input type="text" placeholder='Filter by name' className='home_input' id="fname" name="fname" />
 
@@ -204,7 +145,7 @@ const Navbar = () => {
 
                     < Button style={{
                         borderRadius: 20,
-                        backgroundColor: "lightgrey",
+                        backgroundColor: "#808080",
                         width:'210px',
                         fontSize: "15px",
                         marginLeft:'15rem'

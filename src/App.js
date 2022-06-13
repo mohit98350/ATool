@@ -8,6 +8,7 @@ import {
 import Home from "./components/Home/Home";
 import LoginRedirect from "./components/Home/LoginRedirect";
 import HomeView from "./components/Home/HomeView";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   const backendUrl = 'http://localhost:1337';
@@ -25,8 +26,8 @@ const App = () => {
     <Router>
         <Switch>
           <Route exact path="/connect/:providerName/redirect" component={LoginRedirect} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/home" component={HomeView} />
+          <Route  path="/" exact component={Home} />
+          <PrivateRoute  path="/home" exact component={HomeView} />
         </Switch>
     </Router>
   );
