@@ -5,15 +5,12 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams,Link } from "react-router-dom";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -45,7 +42,6 @@ const Navbar = () => {
 
     useEffect(() => {
         A_uname = localStorage.getItem('username')
-        console.log(A_uname)
         setname(A_uname)
     }, [])
 
@@ -53,7 +49,7 @@ const Navbar = () => {
         e.preventDefault();
         localStorage.removeItem('jwt');
         localStorage.removeItem('username');
-        history.push('/')
+        history.go('/')
         // setIsLogged(false);
     };
 
@@ -62,8 +58,11 @@ const Navbar = () => {
         <>
             <AppBar position="static" style={{ background: 'white' }}>
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters>                    
-                        <img  className='home_logo' src='../logo.jpg'/>
+                    <Toolbar disableGutters>  
+                    <Link to ="/home">
+                    <img  className='home_logo' src='../logo.jpg'/>
+                    </Link>                  
+                        
 
                         <Box sx={{ flexGrow: 1, display: { xs:'flex', md: 'none', color: 'black' } }}>
                           
@@ -126,39 +125,7 @@ const Navbar = () => {
                 </Container>
             </AppBar>
           
-            <div className="small_Nav" style={{ backgroundColor: 'whitesmoke', padding: '10px' }}>
-                <div className="inside">
-                    <input type="text" placeholder='Filter by name' className='home_input' id="fname" name="fname" />
-
-                    <select className='home_select' name="cars" id="cars" >
-                        <option selected disabled hidden >Sort by : <span className='dark'>newest first</span></option>
-                        <option value="saab">newest first</option>
-                        <option value="opel">oldest first</option>
-
-                    </select>
-                    <select className='home_select' name="cars" id="cars" >
-                        <option selected disabled hidden >View all : <span className='dark'>campaigns</span></option>
-                        <option value="saab">all campaigns</option>
-                        <option value="opel">my campaigns</option>
-                        <option value="audi">shared with me</option>
-                    </select>
-
-                    < Button style={{
-                        borderRadius: 20,
-                        backgroundColor: "#808080",
-                        width:'210px',
-                        fontSize: "15px",
-                        marginLeft:'15rem'
-                        
-                    }}
-                    
-                    variant="contained" startIcon={<AddIcon/>} >
-                     new campaigns
-                    </Button>
-
-                </div>
-
-            </div>
+            
         </>
     );
 };

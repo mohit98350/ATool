@@ -3,7 +3,7 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-const backendUrl = 'http://localhost:1337';
+// const backendUrl = 'http://localhost:1337';
 
 const LoginRedirect = (props) => {
   const [text, setText] = useState('');
@@ -17,7 +17,7 @@ const LoginRedirect = (props) => {
     // Now logging with strapi by using the access_token (given by the provider) in props.location.search
     console.log(location.search)
 
-    fetch(`${backendUrl}/api/auth/${params.providerName}/callback${location.search}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/${params.providerName}/callback${location.search}`)
       .then(res => {
         if (res.status !== 200) {
           throw new Error(`Couldn't login to Strapi. Status: ${res.status}`);
@@ -36,7 +36,8 @@ const LoginRedirect = (props) => {
         setLoad(true)
         setText('You have been successfully logged in. You will be redirected in a few seconds...');
     
-        setTimeout(() => history.push('/home'), 3000); // Redirect to homepage after 3 sec
+        setTimeout(() => history.push('/home'), 3000); 
+      
       })
       .catch(err => {
         console.log(err);

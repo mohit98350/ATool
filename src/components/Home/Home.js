@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Grid,Paper ,Box} from "@material-ui/core"
 
 
-const backendUrl = 'http://localhost:1337';
+// const backendUrl = 'http://localhost:1337';
 
 const providersNames = [
   'auth0',
 ];
 
-const LoginButton = (props) => <a href={`${backendUrl}/api/connect/${props.providerName}`}>
+const LoginButton = (props) => <a href={`${process.env.REACT_APP_BACKEND_URL}/api/connect/${props.providerName}`}>
     <button style={{
         borderRadius: 35,
         color:'white',
