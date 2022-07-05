@@ -13,6 +13,7 @@ import LoginRedirect from "./components/Home/LoginRedirect";
 import HomeView from "./components/Home/HomeView";
 import PrivateRoute from "./components/PrivateRoute";
 import Task_home from "./components/Task/Task_home";
+import Show_task from "./components/Task/Show_task";
 
 const App = () => {
   
@@ -35,6 +36,7 @@ const App = () => {
           
           <PrivateRoute  path="/home" exact component={HomeView} />
           <PrivateRoute  path="/task_home/:id" exact component={Task_home} />
+          <PrivateRoute  path="/show_task" exact component={Show_task} />
         </Switch>
       
     </Router>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useHistory, useParams } from "react-router-dom";
+import { Link, Redirect, useHistory, useParams } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -36,9 +36,15 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 
 
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+
+import Create_task from './Create_task';
+
 
 const Category = ['image', 'text']
 const Status = ['pending', 'draft', 'published', 'deleted']
+const pathMap= ['/show_task']
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 5,
@@ -58,6 +64,9 @@ const Task_home = () => {
   const [show_image, setshow_image] = useState(true);
   const[validation , setvalidation] = useState('')
   const [imagePreview, setImagePreview] = useState('');
+  const [showcreate_task,setshowcreate_task] = useState(false);
+  const [nav_value , setNav_val]=useState(0)
+
   // const [p_data, setp_data] = useState('hello')
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -81,6 +90,7 @@ const Task_home = () => {
   const { project: { data } } = useSelector(state => state.project)
   console.log(data)
   const [open, setOpen] = useState(false);
+  const[tasks , setTasks] = useState(0);
 
   const [formdata, setFormData] = useState({
     title: '',
@@ -97,8 +107,14 @@ const Task_home = () => {
 
   }
 
+  const handleCreate_task = ()=>{
+    setshowcreate_task(true);
+  }
 
 
+  const handle_nav_Change = (event, value) => {
+    setNav_val( value );
+  };
 
   const setImageUpload = (e) => {
     const reader = new FileReader();           // babel javascript class
@@ -122,6 +138,26 @@ const Task_home = () => {
     handleCloseUserMenu()
   }
 
+  const count_task = async () => {
+    const token = localStorage.getItem('jwt')
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/tasks`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+
+      }
+    })
+    const { data } = await res.json()
+    console.log( data .length)
+    setTasks( data .length)
+    // setp_data({data})
+   
+
+
+
+
+  }
+
   const fetch_pro = async () => {
     const token = localStorage.getItem('jwt')
     const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/projects/${id}/?populate=*`, {
@@ -132,7 +168,7 @@ const Task_home = () => {
       }
     })
     const { data } = await res.json()
-    console.log({ data })
+    console.log({ data})
     // setp_data({data})
     dispatch(fetch_project({ data }))
 
@@ -278,6 +314,8 @@ const Task_home = () => {
 
     Array.from(links).forEach(el => el.classList.remove("active"));
     e.target.classList.add("active");
+   
+  
   };
 
 
@@ -301,9 +339,10 @@ const Task_home = () => {
     else {
       console.log("loading...")
     }
+    count_task();
 
   }, [data])
-  if (data) {
+  if (data ) {
     
     return (
       <div className='task_cont'>
@@ -508,8 +547,23 @@ const Task_home = () => {
           </div>
           <div className="">
             <div className="task_header_bottom">
-              <a href="#" ><span className="active" onClick={setActiveLink}>Overview</span></a>
-              <a href="#" ><span onClick={setActiveLink}>Task</span></a>
+              {/* <a href="" ><span className="active" onClick={setActiveLink}>Overview</span></a>
+              <a href="/show_task" ><span onClick={setActiveLink}>Task</span></a> */}
+{/* 
+              <Link to=""><span className="active" onClick={setActiveLink}>Overview</span></Link>
+              <Link to="/show_task" ><span onClick={setActiveLink}>Task</span></Link> */}
+
+
+<BottomNavigation
+        value={nav_value}
+        onChange={handle_nav_Change}
+        showLabels
+        className="nav primary"
+      >
+        <BottomNavigationAction label="Overview"   />
+        <BottomNavigationAction label="Tasks" component={Link} to={pathMap[0]} />
+       
+      </BottomNavigation>
 
 
             </div>
@@ -538,6 +592,7 @@ const Task_home = () => {
 
 
               }}
+              onClick={handleCreate_task}
 
                 variant="contained" >
                 Create Task
@@ -546,6 +601,7 @@ const Task_home = () => {
             </div>
 
           </div>
+          { showcreate_task && <Create_task /> }
 
           <div className='task'>
 
@@ -557,7 +613,7 @@ const Task_home = () => {
                   <CardActionArea>
                     <CardMedia
                       className={classes.media}
-                      // image={`http://localhost:1337${data.attributes.Image.data.attributes.formats.medium.url}`}
+            
                       image={`${process.env.REACT_APP_BACKEND_URL}${data.attributes.Image.data.attributes.formats.medium.url}`}
 
                       title={data.attributes.title}
@@ -629,7 +685,7 @@ const Task_home = () => {
 
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div className='task_attributes'>Number of tasks</div>
-                    <div style={{ paddingRight: '90px' }}>1799</div>
+                    <div style={{ paddingRight: '90px' }}>{tasks}</div>
                   </div>
                 </div>
               </div>

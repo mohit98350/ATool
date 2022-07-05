@@ -21,7 +21,6 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import toast, { Toaster } from 'react-hot-toast';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '../LIst/List';
 import { useSelector, useDispatch } from 'react-redux';
 import { add_project } from '../../store/actions';
 
