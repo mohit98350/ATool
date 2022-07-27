@@ -1,14 +1,17 @@
 # ATool - An Open Source Survey Tool
 
-Basic app that shows how to implement login with a third party login provider.
+Atool is an free, open source survey gathering web-based tool, that can be used by anyone to gather a certain set of data about a userbase.
+This tool could be utilised best by individuals like Data Scienists, belonging to major conglomerates, in order to gather a dataset for a vast number of individuals (which could be further used in certain ML/DL algorithms).
+
+
 
 ## Setup
 
 **1 —** Clone this repository and install the dependencies
 ```bash
-git clone git@github.com:strapi/strapi-examples.git
-cd strapi-examples/login-react
+git clone https://github.com/mohit98350/ATool.git
 yarn install
+npm  install
 ```
 
 **2 —** Install a Strapi backend
@@ -26,7 +29,7 @@ npx create-strapi-app my-project --quickstart
 
 **5 -** Launch the app
 ```bash
-REACT_APP_BACKEND_URL=http://localhost:1337 yarn start
+REACT_APP_BACKEND_URL=http://localhost:1337 npm start
 ```
 NB: If you use ngrok, use the ngrok url for `REACT_APP_BACKEND_URL` instead of `http://localhost:1337`
 
@@ -35,11 +38,11 @@ NB: If you use ngrok, use the ngrok url for `REACT_APP_BACKEND_URL` instead of `
 | - | - | - |
 | **REACT_APP_BACKEND_URL** | **Required.** The absolute url of your Strapi app. | `http://localhost:1337` |
 
-## Tool
-React
-Redux
-Material UI
-Strapi
+## Tools
+- React
+- Redux
+- Material UI
+- Stapi
 
 <p align="center">
    <img src='./screenshots/1.png'>
