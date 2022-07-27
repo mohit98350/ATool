@@ -60,7 +60,7 @@ const Navbar = () => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>  
                     <Link to ="/home">
-                    <img  className='home_logo' src='../logo.jpg'/>
+                    <img  className='home_logo' src='../atool.png'/>
                     </Link>                  
                         
 
@@ -113,9 +113,9 @@ const Navbar = () => {
                                 onClose={handleCloseUserMenu}
                             >
 
-                                <MenuItem key={5} onClick={handleCloseUserMenu}>
+                                {/* <MenuItem key={5} onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center">Profile</Typography>
-                                </MenuItem>
+                                </MenuItem> */}
                                 <MenuItem key={6} onClick={logout}>
                                     <Typography textAlign="center">Logout</Typography>
                                 </MenuItem>

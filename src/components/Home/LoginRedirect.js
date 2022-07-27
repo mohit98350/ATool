@@ -51,7 +51,7 @@ const LoginRedirect = (props) => {
   {load ?  <Box sx={{ display: 'flex'}}>
   <CircularProgress  
         size={70}
-        style={{marginLeft: '50%',marginTop:'20%'}}/>
+        style={{marginLeft: '45%',marginTop:'20%'}}/>
 </Box>:''}
     </div>
   

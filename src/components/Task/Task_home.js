@@ -8,43 +8,28 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import { useDispatch, useSelector } from 'react-redux';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { fetch_project } from '../../store/actions';
 import Navbar from '../Navbar/Navbar';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import EditIcon from '@mui/icons-material/Edit';
 import moment from 'moment';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import TextField from '@mui/material/TextField';
-import { FormGroup } from '@material-ui/core';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import toast, { Toaster } from 'react-hot-toast';
-import Menu from '@mui/material/Menu';
-import Tooltip from '@mui/material/Tooltip';
-
-
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-
+import toast, { Toaster } from 'react-hot-toast';
 import Create_task from './Create_task';
+import Task_header from './Task_header';
+import Task_body from './Task_body';
+import Show_task from './Show_task';
+
 
 
 const Category = ['image', 'text']
 const Status = ['pending', 'draft', 'published', 'deleted']
-const pathMap= ['/show_task']
+const pathMap = ['/show_task']
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 5,
@@ -58,14 +43,17 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
+
+
 const Task_home = () => {
   const { id } = useParams()
   const [image, setImage] = useState(null)
   const [show_image, setshow_image] = useState(true);
-  const[validation , setvalidation] = useState('')
+  const [validation, setvalidation] = useState('')
   const [imagePreview, setImagePreview] = useState('');
-  const [showcreate_task,setshowcreate_task] = useState(false);
-  const [nav_value , setNav_val]=useState(0)
+  const [showcreate_task, setshowcreate_task] = useState(false);
+  const [nav_value, setNav_val] = useState(0)
+  const [show_task, setshow_task] = useState(false)
 
   // const [p_data, setp_data] = useState('hello')
 
@@ -90,7 +78,7 @@ const Task_home = () => {
   const { project: { data } } = useSelector(state => state.project)
   console.log(data)
   const [open, setOpen] = useState(false);
-  const[tasks , setTasks] = useState(0);
+  const [tasks, setTasks] = useState(0);
 
   const [formdata, setFormData] = useState({
     title: '',
@@ -107,13 +95,13 @@ const Task_home = () => {
 
   }
 
-  const handleCreate_task = ()=>{
+  const handleCreate_task = () => {
     setshowcreate_task(true);
   }
 
 
   const handle_nav_Change = (event, value) => {
-    setNav_val( value );
+    setNav_val(value);
   };
 
   const setImageUpload = (e) => {
@@ -131,7 +119,7 @@ const Task_home = () => {
   const { title, desc, project_type, status, img, createdby } = formdata
 
 
-  const handlevalidation = (event)=>{
+  const handlevalidation = (event) => {
     const { myValue } = event.currentTarget.dataset
     console.log(myValue)
     setvalidation(myValue)
@@ -148,10 +136,10 @@ const Task_home = () => {
       }
     })
     const { data } = await res.json()
-    console.log( data .length)
-    setTasks( data .length)
+    console.log(data.length)
+    setTasks(data.length)
     // setp_data({data})
-   
+
 
 
 
@@ -168,7 +156,7 @@ const Task_home = () => {
       }
     })
     const { data } = await res.json()
-    console.log({ data})
+    console.log({ data })
     // setp_data({data})
     dispatch(fetch_project({ data }))
 
@@ -277,6 +265,20 @@ const Task_home = () => {
     });
   };
 
+  const handleshowtask = (event, newvalue) => {
+    console.log(nav_value)
+    if (newvalue != nav_value) {
+      setNav_val(newvalue)
+      setshow_task(!show_task)
+    }
+
+  }
+
+  // useEffect(() => {
+  //   handleshowtask()
+  // }, [nav_value])
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -287,42 +289,44 @@ const Task_home = () => {
 
   useEffect(() => {
     fetch_pro();
+
   }, [])
 
 
-  const useStyles = makeStyles({
-    root: {
-      Width: 350,
-      margin: 20
-    },
-    media: {
-      height: 180,
 
-    },
-    content: {
-      height: 35,
-      textAlign: 'center',
-      color: 'grey'
-    }
-  });
+  // const useStyles = makeStyles({
+  //   root: {
+  //     Width: 350,
+  //     margin: 20
+  //   },
+  //   media: {
+  //     height: 180,
+
+  //   },
+  //   content: {
+  //     height: 35,
+  //     textAlign: 'center',
+  //     color: 'grey'
+  //   }
+  // });
+
+  // const useStyles = makeStyles(() => ({
+  //   root: {
+  //     color: "green",
+  //     "&$selected": {
+  //       color: "red"
+  //     }
+  //   },
+  //   selected: {}
+  // }));
 
 
-  const setActiveLink = e => {
-    // const links = document.getElementsByTagName("a");
-    const links = document.getElementsByClassName("active");
 
 
-    Array.from(links).forEach(el => el.classList.remove("active"));
-    e.target.classList.add("active");
-   
-  
-  };
-
-
-  const classes = useStyles();
+  // const classes = useStyles();
 
   useEffect(() => {
-    
+
     if (data) {
       setvalidation(data.attributes.status)
       setFormData({
@@ -342,237 +346,62 @@ const Task_home = () => {
     count_task();
 
   }, [data])
-  if (data ) {
-    
+  if (data) {
+
     return (
       <div className='task_cont'>
         <Navbar />
-        <div className='task_header'>
-          <div className='task_header_title'>
-            <div>
-              {data.attributes.title}
-              <IconButton
-                onClick={() => handleClickOpen()}>
-                <EditIcon style={{ fontSize: 37, color: 'grey', paddingLeft: '7px' }} />
-              </IconButton>
-            </div>
+        <Task_header />
 
-            {/* dialog box */}
+        {showcreate_task && <Create_task />}
 
+        {/* <div className=""> */}
 
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Edit Project</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  {/* To subscribe to this website, please enter your email address here. We
-            will send updates occasionally. */}
-                </DialogContentText>
-                <FormGroup className="form" noValidate autoComplete="off">
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    name='title'
-                    value={title}
-                    label="Title"
-                    type="text"
-                    onChange={handleChange('title')}
-                    fullWidth
-                    variant="standard"
-                  />
-                  <TextField
-                    id="outlined-multiline-flexible"
-                    label="Description"
-                    name='desc'
-                    value={desc}
-                    type="text"
-                    onChange={handleChange('desc')}
-                    multiline
-                    maxRows={4}
-                    style={{ width: 550 }}
+        <div className="task_header_bottom">
 
-                  />
-                  <InputLabel style={{ padding: '8px' }} id="demo-simple-select-standard-label">Project-Type</InputLabel>
-                  <Select
-                    labelId="demo-multiple-name-label"
-                    id="demo-multiple-name"
-                    name="project_type"
-                    value={project_type}
-                    onChange={handleChange('project_type')}
-                    style={{ padding: '10px' }}
-                  >
-                    {Category.map((cat) => (
-                      <MenuItem
-                        key={cat}
-                        value={cat}
+          <Box
+         
 
-                      >
-                        {cat}
-                      </MenuItem>
-                    ))}
-                  </Select>
+          >
+            <BottomNavigation
+              sx={{
 
-                  <div className="imagePreview">
-                    {show_image ?
-                      <img src={`${process.env.REACT_APP_BACKEND_URL}${data.attributes.Image.data.attributes.formats.medium.url}`} />
-                      : ''}
+                '& .Mui-selected': {
 
-                    {imagePreview ? <img src={imagePreview} /> : ''}
-                  </div>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    onChange={setImageUpload}
-                    id="contained-button-file"
-                  />
+                  '& .MuiBottomNavigationAction-label': {
+                    fontSize: theme => theme.typography.caption,
+                    transition: 'none',
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    lineHeight: '20px',
 
-                  <label htmlFor="contained-button-file">
+                  },
+                  '& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label': {
+                    // color: theme => theme.palette.secondary.main
+                    color: 'blue'
+                  }
+                }
+              }}
 
-                    <Button onClick={() => setshow_image(false)} variant="contained" color="primary" component="span" style={{
-                      marginLeft: '210px', textTransform: 'lowercase'
-                    }}>
-                      Edit Image
-                    </Button>
+              value={nav_value}
 
-                  </label>
+              onChange={handleshowtask}
+              showLabels
+              className="nav primary"
+            >
+              <BottomNavigationAction style={{ color: 'black', fontWeight: 'bolder' }} label="Overview" />
+              <BottomNavigationAction style={{ color: 'black', fontWeight: 'bolder' }} label="Tasks" />
+
+            </BottomNavigation>
+          </Box>
+        </div>
 
 
-                  <InputLabel style={{ padding: '8px' }} id="demo-simple-select-standard-label">Status</InputLabel>
-                  <Select
-                    labelId="demo-multiple-name-label"
-                    id="demo-multiple-name"
-                    name="status"
-                    value={status}
-                    onChange={handleChange('status')}
-                    style={{ padding: '10px' }}
-                  >
-                    {Status.map((s) => (
-                      <MenuItem
-                        key={s}
-                        value={s}
+{!show_task ?
 
-                      >
-                        {s}
-                      </MenuItem>
-                    ))}
-                  </Select>
-
-
-                </FormGroup>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                {/* <Button onClick={uploadImage}>Upload</Button> */}
-                <Button
-                  onClick={editproject}>Edit</Button>
-              </DialogActions>
-            </Dialog>
-
-
-            {/* //////////////////////////////////////// dialog box */}
-            <div>
-
-
-
-              <div className='btn'>
-
-                <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Validate" onClick={handleOpenUserMenu} sx={{ p: 0, color: 'black' }}>
-                    <Button style={{
-                      padding: '10px 25px',
-                      borderRadius: '20px',
-                      fontSize: "15px",
-                      backgroundColor: 'white',
-                      marginLeft: '15px',
-                      color: 'black',
-                      textTransform: 'lowercase'
-                    }}
-                      variant="contained"
-                      startIcon={<CheckCircleOutlineIcon />}
-                    >
-
-                    {validation}
-                     </Button>
-
-
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: '45', color: 'black' }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-
-                    {Status.map((cat) => (
-                      <MenuItem
-                      data-my-value={cat}
-                      onClick={handlevalidation}
-                        key={cat}
-                        value={cat}
-
-                      >
-                        {cat}
-                      </MenuItem>
-                    ))}
-
-
-
-
-
-
-                  </Menu>
-
-                  <IconButton
-                    onClick={() => confirmdelete()}>
-                    <DeleteForeverIcon style={{ fontSize: 47, color: 'red' }} />
-                  </IconButton>
-                </Box>
-
-
-
-
-              </div>
-
-            </div>
-          </div>
-          <div className="">
-            <div className="task_header_bottom">
-              {/* <a href="" ><span className="active" onClick={setActiveLink}>Overview</span></a>
-              <a href="/show_task" ><span onClick={setActiveLink}>Task</span></a> */}
-{/* 
-              <Link to=""><span className="active" onClick={setActiveLink}>Overview</span></Link>
-              <Link to="/show_task" ><span onClick={setActiveLink}>Task</span></Link> */}
-
-
-<BottomNavigation
-        value={nav_value}
-        onChange={handle_nav_Change}
-        showLabels
-        className="nav primary"
-      >
-        <BottomNavigationAction label="Overview"   />
-        <BottomNavigationAction label="Tasks" component={Link} to={pathMap[0]} />
-       
-      </BottomNavigation>
-
-
-            </div>
-          </div>
-
-
-          <div className="small_Nav" style={{ backgroundColor: 'white', paddingTop: '20px' }}>
+        <div className="small_Nav" style={{ backgroundColor: 'white', paddingTop: '20px',marginLeft:'-45px' }}>
             <div className="inside">
-
+           
               <div className='project_type'>
                 {data.attributes.project_type}
 
@@ -586,7 +415,7 @@ const Task_home = () => {
                 width: '130px',
                 fontSize: "15x",
                 height: '50px',
-                marginLeft: '15rem',
+                marginLeft: '14rem',
                 marginTop: '20px',
                 textTransform: 'lowercase'
 
@@ -601,104 +430,64 @@ const Task_home = () => {
             </div>
 
           </div>
-          { showcreate_task && <Create_task /> }
+      :null}
 
-          <div className='task'>
+       
+        <div className='task_body'>
+          {/* {!show_task ?
+            <Task_body />
+            : <Show_task />} */}
 
-            <div className='task_items'>
-              {/* {p_data!='hello'?
-     */}
-              <div>
-                <Card key={data.id} className={classes.root}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-            
-                      image={`${process.env.REACT_APP_BACKEND_URL}${data.attributes.Image.data.attributes.formats.medium.url}`}
+          {!show_task ?
+            <Task_body />
+            : <Show_task />}
 
-                      title={data.attributes.title}
-
-                    />
-
-                    <CardContent className={classes.content}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {data.attributes.title}
-                        {/* {p_data.data.attributes.title} */}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions className="cardaction">
-                    <h4>{data.attributes.status}</h4>
-                    {/* <h4>{p_data.data.attributes.status}</h4> */}
-
-                    <h4>{data.attributes.createdby}</h4>
-                    {/* <h4>{p_data.data.attributes.createdby}</h4> */}
-
-
-
-                  </CardActions>
-                </Card>
-              </div>
-              <div className='desc'>
-                <div style={{ padding: '20px', fontSize: '20px', fontWeight: '700' }}>
-                  Description
-                  <div style={{ paddingTop: '30px', opacity: '0.7', color: 'grey' }}>
-                    {data.attributes.description}
-                  </div>
-
-                </div>
-
-              </div>
-
-
+          <div className='task_item2' >
+            <p style={{ color: 'black', fontSize: '20px', fontWeight: '700',marginTop:'40px'}}>Progress</p>
+            <div>
+              <p>0 <span style={{ opacity: '0.5' }}>out of 1,179 tasks labeled</span></p>
+              <Box sx={{ flexGrow: 1 }}>
+                <BorderLinearProgress variant="determinate" value={20} />
+              </Box>
 
             </div>
-            <div className='task_item2'>
-              <p style={{ color: 'black', fontSize: '20px', fontWeight: '700' }}>Progress</p>
-              <div>
-                <p>0 <span style={{ opacity: '0.5' }}>out of 1,179 tasks labeled</span></p>
-                <Box sx={{ flexGrow: 1 }}>
-                  <BorderLinearProgress variant="determinate" value={20} />
-                </Box>
-
-              </div>
-              <div>
-                <p style={{ paddingTop: '20px', fontSize: '20px', fontWeight: '700' }}>Classification</p>
-                {data.attributes.project_type}
-              </div>
-              <div>
-                <p style={{ paddingTop: '20px', fontSize: '20px', fontWeight: '700' }}>Details</p>
-                <div >
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div className='task_attributes'>Creation Date</div>
-                    {moment(data.attributes.createdAt).format("MMM Do YYYY")}
-                    <div>
+            <div>
+              <p style={{ paddingTop: '20px', fontSize: '20px', fontWeight: '700' }}>Classification</p>
+              {data.attributes.project_type}
+            </div>
+            <div>
+              <p style={{ paddingTop: '20px', fontSize: '20px', fontWeight: '700' }}>Details</p>
+              <div >
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div className='task_attributes'>Creation Date</div>
+                  {moment(data.attributes.createdAt).format("MMM Do YYYY")}
+                  <div>
 
 
-                    </div>
                   </div>
+                </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div className='task_attributes'>Project Type</div>
-                    <div style={{ paddingRight: '50px' }}>{data.attributes.title}</div>
-                  </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div className='task_attributes'>Project Type </div>
+                  <div style={{ paddingLeft: '20px' }}>{data.attributes.title}</div>
+                </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div className='task_attributes'>Number of tasks</div>
-                    <div style={{ paddingRight: '90px' }}>{tasks}</div>
-                  </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div className='task_attributes'>Number of tasks </div>
+                  <div style={{ marginRight: '50px' }}>{tasks}</div>
                 </div>
               </div>
             </div>
-
           </div>
+
         </div>
-      </div >
+      </div>
+
 
 
     );
   }
-  // }
+
 }
 
 

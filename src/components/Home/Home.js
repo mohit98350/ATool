@@ -13,13 +13,14 @@ const LoginButton = (props) => <a href={`${process.env.REACT_APP_BACKEND_URL}/ap
         borderRadius: 35,
         color:'white',
         backgroundColor: "grey",
-        padding: "17px 36px",
+        padding: "25px 36px",
         fontSize: "17px",
+        marginLeft:'35px',
         textDecoration:'none',
         border:'none',
         cursor:'pointer'
     }}
-    >Connect to {props.providerName}</button>
+    >LOG IN</button>
   </a>;
 
 
@@ -78,15 +79,46 @@ const Home = (props) => {
   }
 
   return (
-    <div  data-aos="flip-left" className=''>
+    <div>
   
+
+  <Grid  container spacing={1}  >
+        <Grid  item  md={1}>
+
+        
+        </Grid>
+
+        <Grid  className="style_grid" item  md={5}>
+    -
+        <img className='grid_img' src="../delivery1.jpg"/>
+      </Grid>
+      <Grid item md={5}>
+      <Paper className='paper' elevation={2} style={paperStyle}>
+      
+        <img className='logo' src="../atool.png" alt=""></img> 
+        
+       
+        <Box sx={{ marginLeft:'45px',marginTop:'-5px' }}> 
+        {buttons}
+    
+        </Box>
+        
+       
+
+      
+      </Paper>
+      </Grid>
+      <Grid  item  md={1}>
+
+        
+        </Grid>
   
    {/* <img src='https://www.juit.ac.in/front/images/banner2.jpg'/> */}
-    <Grid>
-    <img className='banner' src=""/>
+    {/* <Grid>
+    <img className='banner' src="https://www.juit.ac.in/front/images/banner.jpg"/>
       <Paper className='paper' elevation={5} style={paperStyle}>
         <Grid>
-        { <img className='logo' src="../logo.jpg" alt=""></img> }
+        { <img className='logo' src="../atool.png" alt=""></img> }
         </Grid>
        
         <Box sx={{ marginLeft:'45px',marginTop:'-20px' }}> 
@@ -99,15 +131,15 @@ const Home = (props) => {
       
       </Paper>
       
-    </Grid>
+    </Grid> */}
+
+
     
-    
+    /</Grid>
     </div>
  
 
   )
-  //  <p>{text}</p>
-  //   {buttons} 
   
 }
 
