@@ -39,10 +39,13 @@ NB: If you use ngrok, use the ngrok url for `REACT_APP_BACKEND_URL` instead of `
 | **REACT_APP_BACKEND_URL** | **Required.** The absolute url of your Strapi app. | `http://localhost:1337` |
 
 ## Tools
+
 - React
 - Redux
 - Material UI
 - Stapi
+
+## Preview
 
 <p align="center">
    <img src='./screenshots/1.png'>
