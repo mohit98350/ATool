@@ -43,7 +43,7 @@ NB: If you use ngrok, use the ngrok url for `REACT_APP_BACKEND_URL` instead of `
 - React
 - Redux
 - Material UI
-- Stapi
+- Strapi
 
 ## Preview
 
