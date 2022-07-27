@@ -1,4 +1,4 @@
-# Login Flow Example
+# ATool - An Open Source Survey Tool
 
 Basic app that shows how to implement login with a third party login provider.
 
@@ -34,6 +34,12 @@ NB: If you use ngrok, use the ngrok url for `REACT_APP_BACKEND_URL` instead of `
 | Name | Description | Example |
 | - | - | - |
 | **REACT_APP_BACKEND_URL** | **Required.** The absolute url of your Strapi app. | `http://localhost:1337` |
+
+## Tool
+React
+Redux
+Material UI
+Strapi
 
 <p align="center">
    <img src='./screenshots/1.png'>
