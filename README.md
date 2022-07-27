@@ -35,7 +35,19 @@ NB: If you use ngrok, use the ngrok url for `REACT_APP_BACKEND_URL` instead of `
 | - | - | - |
 | **REACT_APP_BACKEND_URL** | **Required.** The absolute url of your Strapi app. | `http://localhost:1337` |
 
-## Troubleshooting
+<p align="center">
+   <img src='./screenshots/1.png'>
+&nbsp;
+   <img src="./screenshots/2.png" >
+&nbsp;
+   <img src="./screenshots/3.png" >
+<br />
+<br />
+   <img src="./screenshots/4.png" >
+&nbsp;
+   <img src="./screenshots/5.png">
+&nbsp;
+   <img src="./screenshots/6.png" >
+<br />
 
-Make sure you have set the correct backend url using the env variable `REACT_APP_BACKEND_URL`.
-If you're using ngrok, the backend url should be the ngrok url, otherwise it should probably be `http://localhost:1337`.
+</p>
