@@ -14,7 +14,7 @@ This tool could be utilised best by individuals like Data Scienists, Data engine
 - High level architecture view
 
 <p align="center">
-   <img src="./screenshots/2.png" >
+   <img src="/screenshots/Screenshot 2022-08-24 at 9.19.43 PM" >
 &nbsp;
 <br />
 </p>
