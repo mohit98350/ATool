@@ -1,4 +1,4 @@
-# ATool - An Open Source Anootation Tool
+# ATool - An Open Source Annotation Tool
 
 Atool is a free, open source annotation web-based tool, that can be used by anyone to gather a certain set of training data around different problem statements.
 This tool could be utilised best by individuals like Data Scienists, Data engineers belonging to major conglomerates, in order to gather a dataset from a vast number of individuals (which could be further used in certain ML/DL algorithms).
