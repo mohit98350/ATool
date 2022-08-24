@@ -13,7 +13,11 @@ This tool could be utilised best by individuals like Data Scienists, Data engine
 - <a href="https://www.auth0.com/" target="_blank">Auth0</a> for authentication management
 - High level architecture view
 
-
+<p align="center">
+   <img src="./screenshots/2.png" >
+&nbsp;
+<br />
+</p>
 
 ## Guide for local Setup
 
